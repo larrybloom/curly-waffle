@@ -157,3 +157,7 @@ C:\Users\ADMIN\Documents\ECommerce\ECommerce.API\obj\Debug\net8.0\ECommerce.API.
 C:\Users\ADMIN\Documents\ECommerce\ECommerce.API\obj\Debug\net8.0\ECommerce.API.genruntimeconfig.cache
 C:\Users\ADMIN\Documents\ECommerce\ECommerce.API\obj\Debug\net8.0\ref\ECommerce.API.dll
 C:\Users\ADMIN\Documents\ECommerce\ECommerce.API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\ADMIN\Documents\ECommerce\ECommerce.API\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.dll
+C:\Users\ADMIN\Documents\ECommerce\ECommerce.API\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\ADMIN\Documents\ECommerce\ECommerce.API\bin\Debug\net8.0\Microsoft.Extensions.Http.dll
+C:\Users\ADMIN\Documents\ECommerce\ECommerce.API\bin\Debug\net8.0\Microsoft.IdentityModel.Clients.ActiveDirectory.dll

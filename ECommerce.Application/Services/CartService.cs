@@ -13,10 +13,14 @@ namespace ECommerce.Application.Services
     {
         private readonly ICartRepository _cartRepository;
         private readonly IProductRepository _productRepository;
-        public CartService(ICartRepository cartRepository, IProductRepository productRepository)
+        private readonly IApiService<CartDto> _apiService;
+        private const string Endpoint = "api/carts";
+        public CartService(ICartRepository cartRepository, IProductRepository productRepository, IApiService<CartDto> apiService)
         {
+            _apiService = apiService;
             _cartRepository = cartRepository;
             _productRepository = productRepository;
+
         }
         public async Task AddItemToCartAsync(string userId, AddToCartDto addToCartDto)
         {

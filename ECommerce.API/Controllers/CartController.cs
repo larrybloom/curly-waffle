@@ -9,7 +9,7 @@ namespace ECommerce.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class CartController : ControllerBase
     {
         private readonly ICartService _cartService;
@@ -20,7 +20,8 @@ namespace ECommerce.API.Controllers
 
         private string GetUserId()
         {
-            return User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //return User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return "249a623f-9e09-4bc8-8432-804d34c0e6f3";
         }
 
 

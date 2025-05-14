@@ -12,9 +12,12 @@ namespace ECommerce.Application.Services
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
-        public ProductService(IProductRepository productRepository)
+        private readonly IApiService<ProductDto> _apiService;
+        private const string Endpoint = "api/products";
+        public ProductService(IProductRepository productRepository, IApiService<ProductDto> apiService)
         {
             _productRepository = productRepository;
+            _apiService = apiService;
         }
         public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
         {

@@ -36,9 +36,22 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("All", policy =>
+    {
+        policy.AllowAnyOrigin()  // Allows any origin
+              .AllowAnyMethod()  // Allows any HTTP method
+              .AllowAnyHeader(); // Allows any header
+    });
+});
+
+
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped(typeof(IApiService<>), typeof(ApiService<>));
+builder.Services.AddHttpClient();
 
 
 builder.Services.AddRazorPages();
@@ -63,6 +76,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCors("All");
 
 app.MapRazorPages();
 app.MapControllers();

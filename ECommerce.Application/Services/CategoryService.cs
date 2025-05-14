@@ -12,8 +12,11 @@ namespace ECommerce.Application.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
-        public CategoryService(ICategoryRepository categoryRepository)
+        private readonly IApiService<CategoryDto> _apiService;
+        private const string Endpoint = "api/products";
+        public CategoryService(ICategoryRepository categoryRepository, IApiService<CategoryDto> apiService)
         {
+            _apiService = apiService;
             _categoryRepository = categoryRepository;
         }
         public async Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync()

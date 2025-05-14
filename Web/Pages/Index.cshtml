@@ -26,8 +26,10 @@
         </div>
 
         <!-- Products Grid -->
+        
         <div class="col-md-9">
             <div class="row">
+
                 @foreach (var product in Model.Products)
                 {
                     <div class="col-md-4 mb-4">
@@ -35,6 +37,8 @@
                             @* <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name"
                                  onerror="this.src='/images/placeholder.jpg'; this.onerror='';"> *@
                             <div class="card-body">
+                                <form method="post" asp-page-handler="AddCart">
+
                                 <h5 class="card-title">@product.Name</h5>
                                 <p class="card-text text-truncate">@product.Description</p>
                                 <p class="card-text fw-bold">$@product.Price.ToString("F2")</p>
@@ -43,12 +47,17 @@
                                         <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity('@product.Id')">-</button>
                                         <input type="text" class="form-control text-center" id="quantity-@product.Id" value="1" min="1" max="@product.Stock">
                                         <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity('@product.Id', @product.Stock)">+</button>
+                                        @Html.HiddenFor(m => m.cart.ProductId, @product.Id)
+
                                     </div>
-                                    <button class="btn btn-primary" onclick="addToCart(@product.Id)">
+                                    <button class="btn btn-primary" type="submit">
                                         <i class="bi bi-cart-plus"></i> Add
                                     </button>
                                 </div>
+                                </form>
+
                             </div>
+
                         </div>
                     </div>
                 }
@@ -56,6 +65,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Cart Modal -->
 <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">

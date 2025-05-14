@@ -27,10 +27,22 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 //})
 //.AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.AddHttpClient("ECommerceAPI", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7224");
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+});
+
+
+builder.Services.AddHttpContextAccessor();
+
 
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddScoped(typeof(IApiService<>), typeof(ApiService<>));
+
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
