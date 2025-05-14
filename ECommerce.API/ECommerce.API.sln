@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.API", "ECommerce.API.csproj", "{15B0CA70-DE13-4CA9-A656-C8B0C8349CC8}"
 EndProject
@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Core", "..\EComme
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Infrastructure", "..\ECommerce.Infrastructure\ECommerce.Infrastructure.csproj", "{26135563-9EBB-4324-933D-6AD592D8FEFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Web", "..\ECommerce.Web\ECommerce.Web.csproj", "{1C994AF0-9195-4157-953A-B13697D3331C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "..\Web\Web.csproj", "{884B0F60-5AC6-4D3E-9B71-FA2B79E222EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{26135563-9EBB-4324-933D-6AD592D8FEFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26135563-9EBB-4324-933D-6AD592D8FEFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26135563-9EBB-4324-933D-6AD592D8FEFC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1C994AF0-9195-4157-953A-B13697D3331C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C994AF0-9195-4157-953A-B13697D3331C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C994AF0-9195-4157-953A-B13697D3331C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C994AF0-9195-4157-953A-B13697D3331C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{884B0F60-5AC6-4D3E-9B71-FA2B79E222EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{884B0F60-5AC6-4D3E-9B71-FA2B79E222EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{884B0F60-5AC6-4D3E-9B71-FA2B79E222EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{884B0F60-5AC6-4D3E-9B71-FA2B79E222EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

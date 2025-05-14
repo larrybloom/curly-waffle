@@ -1,10 +1,15 @@
 C:\Users\ADMIN\Documents\ECommerce\ECommerce.Application\bin\Debug\net8.0\ECommerce.Application.deps.json
 C:\Users\ADMIN\Documents\ECommerce\ECommerce.Application\bin\Debug\net8.0\ECommerce.Application.dll
 C:\Users\ADMIN\Documents\ECommerce\ECommerce.Application\bin\Debug\net8.0\ECommerce.Application.pdb
+C:\Users\ADMIN\Documents\ECommerce\ECommerce.Application\bin\Debug\net8.0\ECommerce.Core.dll
+C:\Users\ADMIN\Documents\ECommerce\ECommerce.Application\bin\Debug\net8.0\ECommerce.Core.pdb
+C:\Users\ADMIN\Documents\ECommerce\ECommerce.Application\obj\Debug\net8.0\ECommerce.Application.csproj.AssemblyReference.cache
 C:\Users\ADMIN\Documents\ECommerce\ECommerce.Application\obj\Debug\net8.0\ECommerce.Application.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\ADMIN\Documents\ECommerce\ECommerce.Application\obj\Debug\net8.0\ECommerce.Application.AssemblyInfoInputs.cache
 C:\Users\ADMIN\Documents\ECommerce\ECommerce.Application\obj\Debug\net8.0\ECommerce.Application.AssemblyInfo.cs
 C:\Users\ADMIN\Documents\ECommerce\ECommerce.Application\obj\Debug\net8.0\ECommerce.Application.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\Documents\ECommerce\ECommerce.Application\obj\Debug\net8.0\ECommerce.Application.sourcelink.json
+C:\Users\ADMIN\Documents\ECommerce\ECommerce.Application\obj\Debug\net8.0\ECommerc.670E0CBE.Up2Date
 C:\Users\ADMIN\Documents\ECommerce\ECommerce.Application\obj\Debug\net8.0\ECommerce.Application.dll
 C:\Users\ADMIN\Documents\ECommerce\ECommerce.Application\obj\Debug\net8.0\refint\ECommerce.Application.dll
 C:\Users\ADMIN\Documents\ECommerce\ECommerce.Application\obj\Debug\net8.0\ECommerce.Application.pdb

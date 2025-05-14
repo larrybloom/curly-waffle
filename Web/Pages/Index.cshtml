@@ -1,0 +1,275 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Categories Sidebar -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    Categories
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="javascript:void(0)" class="list-group-item list-group-item-action @(Model.CategoryId == null ? "active" : "")"
+                       onclick="filterByCategory(null)">All Products</a>
+
+                    @foreach (var category in Model.Categories)
+                    {
+                        <a href="javascript:void(0)" class="list-group-item list-group-item-action @(Model.CategoryId == category.Id ? "active" : "")"
+                           onclick="filterByCategory(@category.Id)">@category.Name</a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="col-md-9">
+            <div class="row">
+                @foreach (var product in Model.Products)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            @* <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name"
+                                 onerror="this.src='/images/placeholder.jpg'; this.onerror='';"> *@
+                            <div class="card-body">
+                                <h5 class="card-title">@product.Name</h5>
+                                <p class="card-text text-truncate">@product.Description</p>
+                                <p class="card-text fw-bold">$@product.Price.ToString("F2")</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="input-group input-group-sm" style="width: 100px;">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity('@product.Id')">-</button>
+                                        <input type="text" class="form-control text-center" id="quantity-@product.Id" value="1" min="1" max="@product.Stock">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity('@product.Id', @product.Stock)">+</button>
+                                    </div>
+                                    <button class="btn btn-primary" onclick="addToCart(@product.Id)">
+                                        <i class="bi bi-cart-plus"></i> Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cart Modal -->
+<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="cartModalLabel">Shopping Cart</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems">
+                    <!-- Cart items will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex justify-content-between w-100">
+                    <h5>Total: <span id="cartTotal">$0.00</span></h5>
+                    <div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+                        <button type="button" class="btn btn-success">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let cartModal;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+
+            // Add Cart button to navbar
+            const navbarNav = document.querySelector('.navbar-nav');
+            if (navbarNav) {
+                const cartButton = document.createElement('li');
+                cartButton.className = 'nav-item ms-auto';
+                cartButton.innerHTML = `
+                    <a class="nav-link btn btn-outline-primary" href="javascript:void(0)" onclick="showCart()">
+                        <i class="bi bi-cart3"></i> Cart <span id="cartCount" class="badge bg-danger">0</span>
+                    </a>
+                `;
+                navbarNav.appendChild(cartButton);
+            }
+
+            // Load cart on page load
+            loadCart();
+        });
+
+        function filterByCategory(categoryId) {
+            window.location.href = '/?categoryId=' + (categoryId || '');
+        }
+
+        function decreaseQuantity(productId) {
+            const input = document.getElementById('quantity-' + productId);
+            const value = parseInt(input.value) - 1;
+            input.value = value > 0 ? value : 1;
+        }
+
+        function increaseQuantity(productId, max) {
+            const input = document.getElementById('quantity-' + productId);
+            const value = parseInt(input.value) + 1;
+            input.value = value <= max ? value : max;
+        }
+
+        function addToCart(productId) {
+            const quantity = parseInt(document.getElementById('quantity-' + productId).value);
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <text>
+                    fetch('/api/Cart/add', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            productId: productId,
+                            quantity: quantity
+                        })
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            loadCart();
+                            // Show success message
+                            alert('Product added to cart!');
+                        } else {
+                            throw new Error('Failed to add product to cart');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Failed to add product to cart');
+                    });
+            </text>
+        }
+        else
+        {
+            <text>
+                    window.location.href = '/Account/Login';
+            </text>
+        }
+        }
+
+        function loadCart() {
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <text>
+                    fetch('/api/Cart')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update cart badge count
+                        document.getElementById('cartCount').innerText = data.totalItems;
+
+                        // Update cart items in the modal
+                        const cartItemsElement = document.getElementById('cartItems');
+                        if (data.items.length === 0) {
+                            cartItemsElement.innerHTML = '<p class="text-center">Your cart is empty</p>';
+                        } else {
+                            let html = '<div class="table-responsive"><table class="table table-hover">';
+                            html += '<thead><tr><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th><th></th></tr></thead><tbody>';
+
+                            data.items.forEach(item => {
+                                html += `
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="${item.productImageUrl}" alt="${item.productName}" style="width: 50px; height: 50px; object-fit: cover;"
+                                                     onerror="this.src='/images/placeholder.jpg'; this.onerror='';">
+                                                <span class="ms-2">${item.productName}</span>
+                                            </div>
+                                        </td>
+                                        <td>$${item.productPrice.toFixed(2)}</td>
+                                        <td>
+                                            <div class="input-group input-group-sm" style="width: 100px;">
+                                                <button class="btn btn-outline-secondary" type="button" onclick="updateCartItem(${item.id}, ${item.quantity - 1})">-</button>
+                                                <input type="text" class="form-control text-center" value="${item.quantity}" readonly>
+                                                <button class="btn btn-outline-secondary" type="button" onclick="updateCartItem(${item.id}, ${item.quantity + 1})">+</button>
+                                            </div>
+                                        </td>
+                                        <td>$${item.totalPrice.toFixed(2)}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger" onclick="removeCartItem(${item.id})">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                `;
+                            });
+
+                            html += '</tbody></table></div>';
+                            cartItemsElement.innerHTML = html;
+                        }
+
+                        // Update cart total
+                        document.getElementById('cartTotal').innerText = '$' + data.totalPrice.toFixed(2);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            </text>
+        }
+        }
+
+        function updateCartItem(cartItemId, quantity) {
+            if (quantity < 1) {
+                removeCartItem(cartItemId);
+                return;
+            }
+
+            fetch('/api/Cart/update', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    cartItemId: cartItemId,
+                    quantity: quantity
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    loadCart();
+                } else {
+                    throw new Error('Failed to update cart item');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to update cart item');
+            });
+        }
+
+        function removeCartItem(cartItemId) {
+            fetch(/api/Cart/remove/${cartItemId}, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    loadCart();
+                } else {
+                    throw new Error('Failed to remove cart item');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to remove cart item');
+            });
+        }
+
+        function showCart() {
+            cartModal.show();
+        }
+    </script>
+}

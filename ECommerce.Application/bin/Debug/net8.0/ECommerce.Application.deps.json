@@ -7,14 +7,30 @@
   "targets": {
     ".NETCoreApp,Version=v8.0": {
       "ECommerce.Application/1.0.0": {
+        "dependencies": {
+          "ECommerce.Core": "1.0.0"
+        },
         "runtime": {
           "ECommerce.Application.dll": {}
+        }
+      },
+      "ECommerce.Core/1.0.0": {
+        "runtime": {
+          "ECommerce.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
   },
   "libraries": {
     "ECommerce.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ECommerce.Core/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
