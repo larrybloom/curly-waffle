@@ -262,7 +262,7 @@
         }
 
         function removeCartItem(cartItemId) {
-            fetch(/api/Cart/remove/${cartItemId}, {
+            fetch('/api/Cart/remove/${cartItemId}', {
                 method: 'DELETE'
             })
             .then(response => {

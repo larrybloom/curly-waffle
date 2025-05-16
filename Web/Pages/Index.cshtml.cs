@@ -41,7 +41,6 @@ namespace Web.Pages
             }
         }
 
-        [HttpPost]
         public async Task<IActionResult> AddCart()
         {
             using (HttpClient client = new HttpClient())
